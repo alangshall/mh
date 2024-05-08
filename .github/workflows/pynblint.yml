@@ -16,9 +16,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-      # Install pynblint
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+          cache: 'pip' # caching pip dependencies
+
       - name: Install Dependencies
-        run: sudo pip install pynblint
-             sudo pip install lxml[html_clean]
+        run: pip install -r requirements.txt
       - name: Linter Output
         run: pynblint -y $GITHUB_WORKSPACE

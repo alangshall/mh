@@ -1,0 +1,24 @@
+#  Linting with pynblint
+
+name: pynblint
+
+# Controls when the workflow will run
+on: [pull_request]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "lint"
+  lint:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+      # Install pynblint
+      - name: Install Dependencies
+        run: sudo pip install pynblint
+             sudo pip install lxml[html_clean]
+      - name: Linter Output
+        run: pynblint -y $GITHUB_WORKSPACE
